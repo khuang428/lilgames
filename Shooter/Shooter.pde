@@ -1,6 +1,7 @@
-float x = 250, y = 440, speed = 2.5,cooldown = 0;
+float x = 250, y = 440, speed = 2,cooldown = 0;
 ArrayList<Bullet>bs = new ArrayList();
-boolean LPressed, RPressed, UPressed, DPressed, SPressed;
+ArrayList<Enemy>es = new ArrayList();
+boolean LPressed, RPressed, UPressed, DPressed;
 
 void setup(){
   size(500,500);
@@ -10,8 +11,6 @@ void setup(){
 
 void draw(){
   background(0);
-  fill(#ffffff);
-  line(0,400,500,400);
   if(LPressed ^ RPressed){
     if(LPressed){
      x -= speed;
@@ -36,6 +35,7 @@ void draw(){
   }else if(y < 400){
     y = 400;
   }
+  fill(#ffffff);
   rect(x,y,20,20);
   for(int i = 0;i < bs.size();i++){
     Bullet b = bs.get(i);
@@ -46,12 +46,18 @@ void draw(){
     triangle(b.xCor,b.yCor,b.xCor - 3, b.yCor + 3, b.xCor + 3, b.yCor + 3);
     b.move();
   }
-  if(SPressed &&  cooldown == 0){
-      bs.add(new Bullet(x+10,y));
-      cooldown = 10;
-   }
   if(cooldown > 0){
     cooldown--;
+  }
+  
+  // testing shooting, test box
+  Enemy test = new Enemy(1);
+  es.add(test);
+  // check which enemies are dead 
+  for(int i = 0; i < es.size(); i++) {
+    if (es.get(i).alive == false) {
+      es.remove(i);
+    }
   }
 }
 
@@ -68,8 +74,9 @@ void keyPressed(){
   if(keyCode == DOWN || keyCode == 'S'){
     DPressed = true;
   }
-  if(keyCode == ' '){
-    SPressed = true;
+  if(keyCode == ' ' && cooldown == 0){
+    bs.add(new Bullet(x+10,y));
+    cooldown = 10;
   }
 }
 
@@ -85,8 +92,5 @@ void keyReleased(){
   }
   if(keyCode == DOWN || keyCode == 'S'){
     DPressed = false;
-  }
-  if(keyCode == ' '){
-    SPressed = false;
   }
 }
