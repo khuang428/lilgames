@@ -18,6 +18,5 @@ class Enemy {
       //alive = false;
     //}
   }
-  
-  
+    
 }
