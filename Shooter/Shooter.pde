@@ -1,6 +1,6 @@
 int dirX = 0;
 int dirY = 0;
-float x = 10, y = 10, speed = 2,cooldown = 0;
+float x = 250, y = 440, speed = 2,cooldown = 0;
 ArrayList<Bullet>bs = new ArrayList();
 
 void setup(){
@@ -14,14 +14,14 @@ void draw(){
   x += speed * dirX;
   y += speed * dirY;
   if(x > 480){
-    x = 480;
-  }else if(x < 0){
     x = 0;
+  }else if(x < 0){
+    x = 480;
   }
   if(y > 480){
     y = 480;
-  }else if(y < 0){
-    y = 0;
+  }else if(y < 400){
+    y = 400;
   }
   fill(#ffffff);
   rect(x,y,20,20);
