@@ -1,7 +1,7 @@
-float x = 250, y = 440, speed = 2,cooldown = 0;
+float x = 250, y = 440, speed = 2.5,cooldown = 0;
 ArrayList<Bullet>bs = new ArrayList();
 ArrayList<Enemy>es = new ArrayList();
-boolean LPressed, RPressed, UPressed, DPressed;
+boolean LPressed, RPressed, UPressed, DPressed,SPressed;
 
 void setup(){
   size(500,500);
@@ -46,6 +46,10 @@ void draw(){
     triangle(b.xCor,b.yCor,b.xCor - 3, b.yCor + 3, b.xCor + 3, b.yCor + 3);
     b.move();
   }
+  if(SPressed &&  cooldown == 0){
+      bs.add(new Bullet(x+10,y));
+      cooldown = 10;
+   }
   if(cooldown > 0){
     cooldown--;
   }
@@ -74,9 +78,8 @@ void keyPressed(){
   if(keyCode == DOWN || keyCode == 'S'){
     DPressed = true;
   }
-  if(keyCode == ' ' && cooldown == 0){
-    bs.add(new Bullet(x+10,y));
-    cooldown = 10;
+  if(keyCode == ' '){
+    SPressed = true;
   }
 }
 
