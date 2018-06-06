@@ -7,6 +7,9 @@ void setup(){
   size(500,500);
   smooth();
   noStroke();
+    // testing shooting, test box
+  Enemy test = new Enemy(1);
+  es.add(test);
 }
 
 void draw(){
@@ -54,12 +57,11 @@ void draw(){
     cooldown--;
   }
   
-  // testing shooting, test box
-  Enemy test = new Enemy(1);
-  es.add(test);
   // check which enemies are dead 
   for(int i = 0; i < es.size(); i++) {
-    if (es.get(i).alive == false) {
+    es.get(i).alive();
+    rect(100, 100, 20, 20);  // also the hit box for now
+    if (es.get(i).health == 0) {
       es.remove(i);
     }
   }
