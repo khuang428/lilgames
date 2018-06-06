@@ -96,4 +96,7 @@ void keyReleased(){
   if(keyCode == DOWN || keyCode == 'S'){
     DPressed = false;
   }
+  if(keyCode == ' '){
+    SPressed = false;
+  }
 }
