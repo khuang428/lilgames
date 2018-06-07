@@ -2,14 +2,16 @@ float x = 250, y = 440, speed = 2.5,cooldown = 0;
 ArrayList<Bullet>bs = new ArrayList();
 ArrayList<Enemy>es = new ArrayList();
 boolean LPressed, RPressed, UPressed, DPressed,SPressed;
+PImage img;
 
 void setup(){
   size(500,500);
   smooth();
   noStroke();
-    // testing shooting, test box
-  Enemy test = new Enemy(1);
+  // testing shooting, test box
+  Enemy test = new Enemy(5,100,100,1);
   es.add(test);
+  img = loadImage("Monoeyeart.png");
 }
 
 void draw(){
@@ -57,14 +59,35 @@ void draw(){
     cooldown--;
   }
   
-  // check which enemies are dead 
+  
   for(int i = 0; i < es.size(); i++) {
-    es.get(i).alive();
-    rect(100, 100, 20, 20);  // also the hit box for now
-    if (es.get(i).health == 0) {
-      es.remove(i);
+    Enemy e = es.get(i);
+    e.alive();
+    if(e.health>0) {
+      image(img, e.x, e.y, e.size, e.size);
+      e.pathLine();
+      //e.pathCurved();
+    }
+    
+    if(e.y > 500){
+      es.remove(e);
+      i--;
+    }
+    
+    if(e.timer > 0) {
+      tint(255, 0, 0);
+      e.timer--;
+    } else {
+      noTint();
+    }
+    
+    if (e.health == 0) {
+      es.remove(e);
     }
   }
+  
+  
+  
 }
 
 void keyPressed(){
