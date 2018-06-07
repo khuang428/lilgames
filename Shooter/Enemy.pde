@@ -1,22 +1,45 @@
 class Enemy {
-  // health or hits
- int health; 
+ int health, timer;
+ int size = 20;
+ float y, x;
   
-  Enemy(int h) {
+  Enemy(int h, float x, float y, int scale) {
     health = h;
+    this.x = x;
+    this.y = y;
+    size = size*scale;
   }
+  
+  void pathLine() {
+    y += 1.1;
+  }
+  
+  void pathCurved() {
+    y += 1;
+    //if() {
+      //x += 1;
+    //} else {
+     // -= 1;
+   //}
+    
+  }
+  
   
   void alive() {
     if (health > 0) { // bullet hits it because it touches the box
       for(int i = 0; i < bs.size(); i++) {
-        if (bs.get(i).xCor >= 100 && bs.get(i).xCor <= 120 && bs.get(i).yCor >= 80 && bs.get(i).yCor <= 100) { // can change this to variables and add the size 
-          health = health-1;
+        if (bs.get(i).xCor >= x && bs.get(i).xCor <= x+size && bs.get(i).yCor >= y-size && bs.get(i).yCor <= y) {
+          bs.remove(i);
+          health -= 1;
+          timer = 3;
         }
       }
     }
-    //if (health == 0) {
-      //alive = false;
-    //}
   }
-    
+  
+  
 }
+
+//enemy types
+//hit change color...
+//path
