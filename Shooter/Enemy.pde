@@ -2,12 +2,14 @@ class Enemy {
  int health, timer;
  int size = 20;
  float y, x;
+ PImage img;
   
-  Enemy(int h, float x, float y, int scale) {
+  Enemy(int h, float x, float y, int scale,PImage i) {
     health = h;
     this.x = x;
     this.y = y;
     size = size*scale;
+    img = i;
   }
   
   void pathLine() {
